@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>WELCOME TO THE WORLD</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"> 
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+   
+</head>
+<body id="loginImg">
+   
+                  <div class="row">
+                    <div class="col-12-lg">
+                
+                  <p>
+                    <!-- Button to open the modal -->
+                    <button style="margin-top: 500px; margin-left: 750px;" class="btn-success btn-lg" id="mainbtn" onclick="document.getElementById('id01').style.display='block'">Let's GO!</button>
+                    <div id="firebaseui-auth-container" style="display: none"></div>
+                  </p>
+                </div>
+              </div>
+            </div>
+                <!-- The Modal -->
+                <div id="id01" class="modal">
+                    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                    
+                    <!-- Modal Content -->
+                    <form class="modal-content animate" id="login" action="world.html">
+                      <div class="container">
+                        <div class="row">
+                          <label for="uname">
+                            <b>Username/E-Mail:</b>
+                          </label>
+                          <input type="text" placeholder="" name="uname" id="ln-email" required>
+                        </div>
+            
+                        <div class="row">
+                          <label for="psw">
+                            <b>Password:</b>
+                          </label>
+                          <input type="password" placeholder="" name="psw" id="ln-password" required>
+                        </div>
+            
+                        <div class="row">
+                          
+                          <label>
+                            <input type="checkbox" checked="checked" name="remember">
+                            <b>Remember Me</b>
+                          </label>
+            
+                          <div class="row" id="btnrow">
+                            <button class="btn-success" id="loginbtn" type="submit">Login</button>
+                            <button class="btn-secondary" type="button" onclick="document.getElementById('id01').style.display='none'" id="cancelbtn">Cancel</button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  
+              </header>
+
+</body>
+</html>
