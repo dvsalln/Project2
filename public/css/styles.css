@@ -45,3 +45,18 @@ button.edit {
 .top-30 {
   margin-top: 30px;
 }
+
+body {
+  font-family: 'PT Sans Narrow', sans-serif;
+}
+
+.display-4, .lead {
+  text-align: center;
+}
+
+.btnSignIn, .btnSignUp {
+  /* need to center the buttons */
+  margin-left:auto;
+  margin-right:auto;
+  display:block;
+}
