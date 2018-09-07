@@ -1,81 +1,95 @@
 <!DOCTYPE html>
 <html>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"> 
-        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    
-<!-- Firebase Reference -->
-<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+    <title>WORLD</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"> 
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.25.0/sweetalert2.all.js"></script> 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.25.0/sweetalert2.css">
 
-
-
  <!-- Icon Bar (Sidebar - hidden on small screens) -->
  <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
    <!-- Avatar image in top left corner -->
-  
-   <a href="index.html" class="w3-bar-item w3-button w3-padding-large w3-black">
-     <i class="fa fa-home w3-xxlarge"></i>
-     <p>HOME</p>
+   <img id="navProfileImg" src="http://placehold.it/80x80" class="profile-image img-circle">
+   <hr>
+ 
+   <div class="btn-group dropdown">
+        <button id="dropbtn" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          THE WORLD
+        </button>
+        <div class="dropdown-menu">
+          <!-- Dropdown menu links -->
+            <a id="dropitem" class="dropdown-item" href="">DISCOVER</a>
+            <a id="dropitem" class="dropdown-item" href="">CONNECT</a>
+            <a id="dropitem" class="dropdown-item" href="">HELP</a>
+        </div>
+      </div>
    </a>
-   <a href="console.html" class="w3-bar-item w3-button w3-padding-large w3-black">
-     <i class="fa fa-eye w3-xxlarge"></i>
-     <p>CONSOLE</p>
-   </a>
+        <div class="btn-group dropdown">
+          <button id="dropbtn" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            MY WORLD
+          </button>
+          <div style="width: 90%;" class="dropdown-menu">
+            <!-- Dropdown menu links -->
+            <a id="dropitem" class="dropdown-item" href="">MY FEED</a>
+            <a id="dropitem" class="dropdown-item" href="">MY PROFILE</a>
+            <a id="dropitem" class="dropdown-item" href=""></a>
+          </div>
+        </div>
+        </a>
  </nav>
-
- <!-- Navbar on small screens (Hidden on medium and large screens) -->
- <div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
-   <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
-     <a href="index.html" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
-     <a href="console.html" class="w3-bar-item w3-button" style="width:25% !important">CONSOLE</a>
-   </div>
- </div>
-
- <div class="jumbotron text-white mb-0 radius-0" id="main-jumbotron">
-     <div class="container" id="jumbotron-container">
-         <h1>CONSOLE</h1>
-         <!-- Clock -->
-     <div id="clock">
-         <span id="currentTime"> </span>
-       </div>
-       <!-- Buttons -->
-         <!-- <p>
-             <button style="height: 40px;" class="btn-success" type="button" data-toggle="collapse" data-target="#addMemberForm" aria-expanded="false" aria-controls="addMemberForm">
-               Add New Member
-               </button>
-             <button style="height: 40px; border: 2px solid silver;" class="btn bg-dark btn-secondary" type="button" data-toggle="collapse" data-target="#card" aria-expanded="false" aria-controls="card">
-               View Groups
-             </button>
-           </p> -->
-     </div>
-   </div>
-   
+<!-- PROFILE CARD -->
+ <div id="profileCard" class="card" style="width: 18rem;">
+        <!-- <img class="card-img-top" src=".../100px180/?text=Image cap" alt="Card image cap"> -->
+        <div class="card-body">
+          <h5 class="card-title">Name</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Occupation:</li>
+          <li class="list-group-item">Age:</li>
+          <li class="list-group-item">Location:</li>
+        </ul>
+        <div class="card-body">
+          <a href="#" class="card-link"><button id="notifsBtn" type="button" class="btn btn-primary">
+                Notifications <span class="badge badge-light">3</span>
+              </button></a>
+              <button type="button" class="btn btn-danger">Sign Out</button>
+        </div>
+      </div>
+<div class="w3-padding-large" id="main">
  <!-- Page Content -->
- <div class="w3-padding-large" id="main">
-   
+ <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-4">Hello, World!</h1>
+          <p style="color: #131313;" class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+        
+        <div id="clock">
+                <span id="currentTime"> </span>
+                <script>
+                    	function displayTime () {
+	                    var currentTime = moment().format('MMM Do YYYY, h:mm:ss a');
+	                    $("#currentTime").text(currentTime);
+  
+	                    }
+                        setInterval(displayTime, 1000);
+                </script>
+              </div>
+             </div>
+      </div>
+      
  <div class="container py-5">
-         <!-- trains go here -->
 
-</div>
-</div>
-
-
-
-
-
-    <h3>My Google Maps Demo</h3>
     <!--The div element for the map -->
     <div id="map"></div>
     <script>
 // Initialize and add the map
 function initMap() {
   // The location of Uluru
-  var uluru = {lat: -25.344, lng: 131.036};
+  var uluru = {lat: 32.344, lng: -115.036};
   // The map, centered at Uluru
   var map = new google.maps.Map(
       document.getElementById('map'), {zoom: 4, center: uluru});

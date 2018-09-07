@@ -2,19 +2,68 @@
  #html {
      padding: 10px;
  }
+ body {
+    background: url('../images/light-grey-terrazzo.png');
+}
 
+body, html, form, p, h1,h2,h3,h4,h5,h6 {
+    font-family: "Montserrat", sans-serif; 
+    letter-spacing: 3px;
+}
+p {
+    color: white;
+}
+.w3-row-padding img {
+    margin-bottom: 12px;
+}
  /* Set the width of the sidebar to 120px */
 .w3-sidebar {
-    width: 120px;background: #222;
+    width: 180px;background: #333;
+}
+
+#navProfileImg {
+    margin-top: 10px;
+    border-radius: 100px 100px 100px 100px;
+}
+
+#dropbtn {
+   
+    margin-bottom: 20px;
+    
+}
+
+#dropitem {
+    color: white;
+    padding: 2%;
+    height: 30px;
+    background: #222;
 }
 /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
 #main {
-    margin-left: 120px;
+    margin-left: 170px;
 }
- 
- #map {
-    height: 400px;  /* The height is 400 pixels */
-    width: 100%;  /* The width is the width of the web page */
+ul {
+    color: #131313;
+    padding: 1%;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 20px 20px 20px 20px;
+}
+#map {
+    height: 500px;  /* The height is 400 pixels */
+    width: 1000px;  /* The width is the width of the web page */
+}
+#profileCard {
+    color: white;
+    float: right;
+    background: #333;
+    border: 5px solid silver;
+    border-radius: 20px 20px 20px 20px;
+    height: 500px;
+}
+
+#notifsBtn {
+    
 }
 
 #jumbotron-title {
