@@ -22,7 +22,7 @@
         </button>
         <div class="dropdown-menu">
           <!-- Dropdown menu links -->
-            <a id="dropitem" class="dropdown-item" href="">DISCOVER</a>
+            <a id="dropitem" class="dropdown-item" href="world.html">DISCOVER</a>
             <a id="dropitem" class="dropdown-item" href="">CONNECT</a>
             <a id="dropitem" class="dropdown-item" href="">HELP</a>
         </div>
@@ -40,11 +40,15 @@
           </div>
         </div>
         </a>
+        <a href="#" class="card-link"><button id="notifsBtn" type="button" class="btn btn-primary">
+                NOTIFICATIONS <span class="badge badge-light">3</span>
+              </button></a>
+              <button type="button" class="btn btn-danger">Sign Out</button>
  </nav>
-<!-- PROFILE CARD -->
+<!-- PROFILE CARD
  <div id="profileCard" class="card" style="width: 18rem;">
-        <!-- <img class="card-img-top" src=".../100px180/?text=Image cap" alt="Card image cap"> -->
-        <div class="card-body">
+        <img class="card-img-top" src=".../100px180/?text=Image cap" alt="Card image cap"> -->
+        <!-- <div class="card-body">
           <h5 class="card-title">Name</h5>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         </div>
@@ -54,12 +58,10 @@
           <li class="list-group-item">Location:</li>
         </ul>
         <div class="card-body">
-          <a href="#" class="card-link"><button id="notifsBtn" type="button" class="btn btn-primary">
-                Notifications <span class="badge badge-light">3</span>
-              </button></a>
-              <button type="button" class="btn btn-danger">Sign Out</button>
+    
+          
         </div>
-      </div>
+      </div>  -->
 <div class="w3-padding-large" id="main">
  <!-- Page Content -->
  <div class="jumbotron jumbotron-fluid">
@@ -89,13 +91,31 @@
 // Initialize and add the map
 function initMap() {
   // The location of Uluru
-  var uluru = {lat: 32.344, lng: -115.036};
+  var options = ({lat:37.8715926, lng:-122.272747});
   // The map, centered at Uluru
   var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 4, center: uluru});
+      document.getElementById('map'), {zoom: 4, center: options});
   // The marker, positioned at Uluru
-  var marker = new google.maps.Marker({position: uluru, map: map});
+  var marker = new google.maps.Marker({position: options, map: map});
 }
+    // var infoWindow = new google.maps.infoWindow({
+    //     content: '<h1>Berkeley, CA</h1>'
+    // });
+
+    // marker.addListener('click', function(){
+    //     infoWindow.open(map, market);
+    // });
+
+    addMarker({lat:37.8715926, lng:-122.272747});
+
+    function addMarker(coords){
+        var Marker = new google.maps.Marker({
+            position:coords,
+            map:map,
+            icon: '#'
+        });
+    }
+
     </script>
     <!--Load the API from the specified URL
     * The async attribute allows the browser to render the page while the API loads
