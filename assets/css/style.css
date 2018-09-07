@@ -24,6 +24,8 @@ p {
 #navProfileImg {
     margin-top: 10px;
     border-radius: 100px 100px 100px 100px;
+    height: 125px;
+    width: 125px;
 }
 
 #dropbtn {
