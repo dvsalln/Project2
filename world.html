@@ -90,24 +90,47 @@
 <!--- Body --->
 <body>
   <div class="container" id="addressContainer">
+    <h2 id="text-center">Enter Location: </h2>
+    <form action="" id="location-form">
+      <input class="form-control form-control-lg" type="text" id="location-input">
+      <br>
+      <button type="submit" class="btn btn-primary btn-block">Submit</button>
+    </form>
+
   <!-- Formatted Address Div --->
-  <div id="formatted-address">
+  <div class="card-block" id="formatted-address">
     </div>
     <!-- Address Components Div --->
-    <div id="address-components">
-      </div>
-  </div>
+    <div class="card-block" id="address-components">
+    </div>
+    <!-- Geometry Div --->
+    <div class="card-block" id="geometry">
+    </div>
   </div>
 
 <!--- Map --->
+<div class="row">
+  <div class="col-12-lg"></div>
   <div id="map"></div>
+  </div>
 <!--- Map Script --->
   <script>
   // Call Geocode
-  geocode();
+  //geocode();
+
+  // Get Location form
+  var locationForm = document.getElementById('location-form');
+
+  // Listen for submit
+  locationForm.addEventListener('submit', geocode);
+
   // Geocode Google Maps
-  function geocode(){
-    var location = '2808 Dwight Way';
+  function geocode(e){
+    // Prevent actual submit
+    e.preventDefault();
+
+    var location = document.getElementById('location-input').value;
+
     axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
       params:{
         address:location,
@@ -137,9 +160,22 @@
       }
       addressComponentsOutput += '</ul>';
 
+      // Geometry
+      var lat = response.data.results[0].geometry.location.lat;
+      var lng = response.data.results[0].geometry.location.lng;
+      var geometryOutput = `
+        <ul class="list-group">
+          <li class="list-group-item"><strong>Latitude</strong>:
+            ${lat}</li>
+          <li class="list-group-item"><strong>Longitude</strong>:
+            ${lng}</li>
+        </ul>
+      `;
+
       // Output to app
       document.getElementById('formatted-address').innerHTML = formattedAddressOutput;
       document.getElementById('address-components').innerHTML = addressComponentsOutput;
+      document.getElementById('geometry').innerHTML = geometryOutput;
 
     })
     .catch(function(error){
