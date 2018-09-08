@@ -60,3 +60,7 @@ body {
   margin-right:auto;
   display:block;
 }
+
+.profileContainer {
+  margin-top: 20px;
+}
