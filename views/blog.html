@@ -13,7 +13,7 @@
      <!-- Icon Bar (Sidebar - hidden on small screens) -->
      <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
        <!-- Avatar image in top left corner -->
-       <img id="navProfileImg" src="http://placehold.it/80x80" class="profile-image img-circle">
+       <img id="navProfileImg" src="../assets/images/earth.jpg" class="profile-image img-circle">
        <hr>
      
        <div class="btn-group dropdown">
@@ -40,6 +40,10 @@
               </div>
             </div>
             </a>
+            <a href="#" class="card-link"><button id="notifsBtn" type="button" class="btn btn-primary">
+                NOTIFICATIONS <span class="badge badge-light">3</span>
+              </button></a>
+              <button type="button" class="btn btn-danger">Sign Out</button>
      </nav>
     <div class="w3-padding-large" id="main">
      <!-- Page Content -->
@@ -76,14 +80,6 @@
       </div>
     </div> 
 
-        <!--Load the API from the specified URL
-        * The async attribute allows the browser to render the page while the API loads
-        * The key parameter will contain your own API key (which is not needed for this tutorial)
-        * The callback parameter executes the initMap() function
-        -->
-        <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdhLrK9XoNFP9Yyjxcdd34z3Yf5K_qxeI&callback=initMap">
-        </script>
       </body>
     </html>
     

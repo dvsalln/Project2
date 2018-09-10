@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"> 
+<<<<<<< HEAD:world.html
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
+=======
     <link rel="stylesheet" type="text/css" href="../public/css/style.css">
+>>>>>>> dc0f7850d414127ed54925f9a567da8b56079d47:views/world.html
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.25.0/sweetalert2.all.js"></script> 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.25.0/sweetalert2.css">
@@ -13,7 +19,7 @@
  <!-- Icon Bar (Sidebar - hidden on small screens) -->
  <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
    <!-- Avatar image in top left corner -->
-   <img id="navProfileImg" src="http://placehold.it/80x80" class="profile-image img-circle">
+   <img id="navProfileImg" src="assets/images/earth.jpg" class="profile-image img-circle">
    <hr>
  
    <div class="btn-group dropdown">
@@ -45,10 +51,10 @@
               </button></a>
               <button type="button" class="btn btn-danger">Sign Out</button>
  </nav>
-<!-- PROFILE CARD
- <div id="profileCard" class="card" style="width: 18rem;">
-        <img class="card-img-top" src=".../100px180/?text=Image cap" alt="Card image cap"> -->
-        <!-- <div class="card-body">
+
+ <!-- <div id="profileCard" class="card" style="width: 18rem;">
+        <img class="card-img-top" src=".../100px180/?text=Image cap" alt="Card image cap">
+        <div class="card-body">
           <h5 class="card-title">Name</h5>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         </div>
@@ -61,71 +67,205 @@
     
           
         </div>
-      </div>  -->
+      </div> -->
+
+<!-- Jumbotron --->
 <div class="w3-padding-large" id="main">
  <!-- Page Content -->
  <div class="jumbotron jumbotron-fluid">
         <div class="container">
           <h1 class="display-4">Hello, World!</h1>
           <p style="color: #131313;" class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
-        
+<!-- Clock -->
         <div id="clock">
                 <span id="currentTime"> </span>
                 <script>
                     	function displayTime () {
 	                    var currentTime = moment().format('MMM Do YYYY, h:mm:ss a');
 	                    $("#currentTime").text(currentTime);
-  
 	                    }
                         setInterval(displayTime, 1000);
                 </script>
               </div>
              </div>
       </div>
-      
- <div class="container py-5">
 
-    <!--The div element for the map -->
-    <div id="map"></div>
-    <script>
-// Initialize and add the map
-function initMap() {
-  // The location of Uluru
-  var options = ({lat:37.8715926, lng:-122.272747});
-  // The map, centered at Uluru
-  var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 4, center: options});
-  // The marker, positioned at Uluru
-  var marker = new google.maps.Marker({position: options, map: map});
-}
-    // var infoWindow = new google.maps.infoWindow({
-    //     content: '<h1>Berkeley, CA</h1>'
-    // });
+<div class="container py-5">
+<!--- Body --->
+<body>
+  <div class="container" id="addressContainer">
+    <h2 id="text-center">Enter Location: </h2>
+    <form action="" id="location-form">
+      <input class="form-control form-control-lg" type="text" id="location-input">
+      <br>
+      <button type="submit" class="btn btn-primary btn-block">Submit</button>
+    </form>
 
-    // marker.addListener('click', function(){
-    //     infoWindow.open(map, market);
-    // });
+  <!-- Formatted Address Div --->
+  <div class="card-block" id="formatted-address">
+    </div>
+    <!-- Address Components Div --->
+    <div class="card-block" id="address-components">
+    </div>
+    <!-- Geometry Div --->
+    <div class="card-block" id="geometry">
+    </div>
+  </div>
 
-    addMarker({lat:37.8715926, lng:-122.272747});
+<!--- Map --->
+<div class="row">
+  <div class="col-12-lg"></div>
+  <div id="map"></div>
+  </div>
+<!--- Map Script --->
+  <script>
+  // Call Geocode
+  //geocode();
 
-    function addMarker(coords){
-        var Marker = new google.maps.Marker({
-            position:coords,
-            map:map,
-            icon: '#'
-        });
+  // Get Location form
+  var locationForm = document.getElementById('location-form');
+
+  // Listen for submit
+  locationForm.addEventListener('submit', geocode);
+
+  // Geocode Google Maps
+  function geocode(e){
+    // Prevent actual submit
+    e.preventDefault();
+
+    var location = document.getElementById('location-input').value;
+
+    axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
+      params:{
+        address:location,
+        key:'AIzaSyBdhLrK9XoNFP9Yyjxcdd34z3Yf5K_qxeI'
+      }
+    })
+    .then(function(response){
+      // Log full response
+      console.log(response);
+
+      // Formatted Address
+      var formattedAddress = response.data.results[0].formatted_address;
+      var formattedAddressOutput = `
+        <ul class="list-group">
+        <li class="list-group-item">${formattedAddress}</li>
+        </ul>
+      `;
+        
+      // Address Components
+      var addressComponents = response.data.results[0].address_components;
+      var addressComponentsOutput = '<ul class="list-group">';
+      for(var i = 0;i < addressComponents.length;i++){
+        addressComponentsOutput += `
+          <li class="list-group-item"><strong>${addressComponents[i].types[0]
+          }</strong>: ${addressComponents[i].long_name}</li>
+        `;
+      }
+      addressComponentsOutput += '</ul>';
+
+      // Geometry
+      var lat = response.data.results[0].geometry.location.lat;
+      var lng = response.data.results[0].geometry.location.lng;
+      var geometryOutput = `
+        <ul class="list-group">
+          <li class="list-group-item"><strong>Latitude</strong>:
+            ${lat}</li>
+          <li class="list-group-item"><strong>Longitude</strong>:
+            ${lng}</li>
+        </ul>
+      `;
+
+      // Output to app
+      document.getElementById('formatted-address').innerHTML = formattedAddressOutput;
+      document.getElementById('address-components').innerHTML = addressComponentsOutput;
+      document.getElementById('geometry').innerHTML = geometryOutput;
+
+    })
+    .catch(function(error){
+      console.log(error);
+    });
+  }
+
+  // Javascript Google Maps 
+  function initMap(){
+    // Map Options
+    var options = {
+      scrollwheel: false,
+      scaleControl: false,
+      zoom:8,
+      center: {lat:37.8716,lng:-122.2727}
     }
 
-    </script>
-    <!--Load the API from the specified URL
-    * The async attribute allows the browser to render the page while the API loads
-    * The key parameter will contain your own API key (which is not needed for this tutorial)
-    * The callback parameter executes the initMap() function
-    -->
-    <script async defer
+    // New Map
+    var map = new google.maps.Map(document.getElementById('map'), options);
+    
+    // // Listen for click on map
+    // google.maps.event.addListener(map, 'click',
+    //  function(event){
+    //    addMarker({coords:event.latLng});
+    //  });
+
+    // Array of markers
+    var markers = [
+      {
+      coords:{lat:37.8716,lng:-122.2727},
+      iconImage: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+      content:'<h2>San Francisco, CA<h2>'
+      },
+      {
+      coords:{lat:37.7749,lng:-122.4194},
+      iconImage: '',
+      content:'<h2>Berkeley, CA</h2>'
+      },
+      {
+      coords:{lat:37.8044,lng:-122.2711},
+      iconImage: '',
+      content:'<h2>Oakland, CA</h2>'
+      },
+      {
+      coords:{lat:37.3382,lng:-121.8863},
+      iconImage: '',
+      content:'<h2>San Jose, CA</h2>'
+    }
+    ];
+
+    // Loop through markers
+    for(var i = 0;i < markers.length;i++){
+      // Add marker
+      addMarker(markers[i]);
+    }
+
+    // Add Marker Function
+    function addMarker(props){
+      var marker = new google.maps.Marker({
+      position:props.coords,
+      map:map,
+      // icon:props.iconImage
+    });
+    // Check for customIcon
+    if(props.iconImage){
+      // Set icon image
+      marker.setIcon(props.iconImage);
+    }
+
+    // Check content
+    if(props.content){
+      var infoWindow = new google.maps.InfoWindow({
+      content:props.content
+    });
+    
+    marker.addListener('click', function(){
+      infoWindow.open(map, marker);
+    });
+    }
+  }
+}
+  </script>
+  <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdhLrK9XoNFP9Yyjxcdd34z3Yf5K_qxeI&callback=initMap">
     </script>
-  </body>
+ </body>
 </html>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
