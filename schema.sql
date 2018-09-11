@@ -4,7 +4,7 @@ DROP DATABASE IF EXISTS friendify_db;
 
 CREATE DATABASE friendify_db;
 
--- USE friendify_db;
+USE friendify_db;
 
 -- CREATE TABLE friends
 -- (

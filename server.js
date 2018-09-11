@@ -16,8 +16,12 @@
 // =============================================================
 var express = require("express");
 var bodyParser = require("body-parser");
+<<<<<<< HEAD
 var path = require('path');
 
+=======
+var path = require("path");
+>>>>>>> 482d05b213ed27246b26232d90336cb9e9855a30
 // Sets up the Express App
 // =============================================================
 var app = express();
@@ -39,6 +43,7 @@ app.use(bodyParser.json());
 
 // Static directory
 <<<<<<< HEAD
+<<<<<<< HEAD
 app.use(express.static(path.join(__dirname, 'app/public')));
 
 
@@ -46,6 +51,10 @@ app.use(express.static(path.join(__dirname, 'app/public')));
 app.use(express.static("views"));
 >>>>>>> master
 
+=======
+app
+.use(express.static("views"));
+>>>>>>> 482d05b213ed27246b26232d90336cb9e9855a30
 // Routes
 // =============================================================
 require("./app/routes/friend-api-routes.js")(app);
