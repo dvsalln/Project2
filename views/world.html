@@ -5,13 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"> 
-<<<<<<< HEAD:world.html
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    
-=======
     <link rel="stylesheet" type="text/css" href="../public/css/style.css">
->>>>>>> dc0f7850d414127ed54925f9a567da8b56079d47:views/world.html
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.25.0/sweetalert2.all.js"></script> 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.25.0/sweetalert2.css">
@@ -19,7 +15,7 @@
  <!-- Icon Bar (Sidebar - hidden on small screens) -->
  <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
    <!-- Avatar image in top left corner -->
-   <img id="navProfileImg" src="assets/images/earth.jpg" class="profile-image img-circle">
+   <img id="navProfileImg" src="../assets/images/earth.jpg" class="profile-image img-circle">
    <hr>
  
    <div class="btn-group dropdown">
@@ -40,7 +36,7 @@
           </button>
           <div style="width: 90%;" class="dropdown-menu">
             <!-- Dropdown menu links -->
-            <a id="dropitem" class="dropdown-item" href="public/blog.html">MY FEED</a>
+            <a id="dropitem" class="dropdown-item" href="../views/blog.html">MY FEED</a>
             <a id="dropitem" class="dropdown-item" href="">MY PROFILE</a>
             <a id="dropitem" class="dropdown-item" href=""></a>
           </div>
@@ -121,20 +117,15 @@
   <script>
   // Call Geocode
   //geocode();
-
   // Get Location form
   var locationForm = document.getElementById('location-form');
-
   // Listen for submit
   locationForm.addEventListener('submit', geocode);
-
   // Geocode Google Maps
   function geocode(e){
     // Prevent actual submit
     e.preventDefault();
-
     var location = document.getElementById('location-input').value;
-
     axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
       params:{
         address:location,
@@ -144,7 +135,6 @@
     .then(function(response){
       // Log full response
       console.log(response);
-
       // Formatted Address
       var formattedAddress = response.data.results[0].formatted_address;
       var formattedAddressOutput = `
@@ -163,7 +153,6 @@
         `;
       }
       addressComponentsOutput += '</ul>';
-
       // Geometry
       var lat = response.data.results[0].geometry.location.lat;
       var lng = response.data.results[0].geometry.location.lng;
@@ -175,18 +164,15 @@
             ${lng}</li>
         </ul>
       `;
-
       // Output to app
       document.getElementById('formatted-address').innerHTML = formattedAddressOutput;
       document.getElementById('address-components').innerHTML = addressComponentsOutput;
       document.getElementById('geometry').innerHTML = geometryOutput;
-
     })
     .catch(function(error){
       console.log(error);
     });
   }
-
   // Javascript Google Maps 
   function initMap(){
     // Map Options
@@ -196,7 +182,6 @@
       zoom:8,
       center: {lat:37.8716,lng:-122.2727}
     }
-
     // New Map
     var map = new google.maps.Map(document.getElementById('map'), options);
     
@@ -205,7 +190,6 @@
     //  function(event){
     //    addMarker({coords:event.latLng});
     //  });
-
     // Array of markers
     var markers = [
       {
@@ -229,13 +213,11 @@
       content:'<h2>San Jose, CA</h2>'
     }
     ];
-
     // Loop through markers
     for(var i = 0;i < markers.length;i++){
       // Add marker
       addMarker(markers[i]);
     }
-
     // Add Marker Function
     function addMarker(props){
       var marker = new google.maps.Marker({
@@ -248,7 +230,6 @@
       // Set icon image
       marker.setIcon(props.iconImage);
     }
-
     // Check content
     if(props.content){
       var infoWindow = new google.maps.InfoWindow({
