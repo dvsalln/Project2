@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"> 
     <!-- <link rel="stylesheet" type="text/css" href="../public/css/styles.css"> -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.25.0/sweetalert2.all.js"></script> 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.25.0/sweetalert2.css">
@@ -239,7 +240,12 @@ ul {
           <h1 class="display-4">Hello, World!</h1>
           <p style="color: #131313;" class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
 <!-- Clock -->
-        <div id="clock">
+<br>
+<div id="location">
+    <p></p>
+</div>
+        <div id="clock" style="margin-top: 10px;">
+          <br>
                 <span id="currentTime"> </span>
                 <script>
                     	function displayTime () {
@@ -252,7 +258,7 @@ ul {
                  <br>
           <p>
               <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#addressCard" aria-expanded="false" aria-controls="addressCard">
-                Search Location
+                Search A Location
                 </button>
               <!-- <button class="btn bg-dark btn-secondary" typ e="button" data-toggle="collapse" data-target="#card" aria-expanded="false" aria-controls="card">
                 View Groups
@@ -274,7 +280,7 @@ ul {
       <button type="submit" class="btn btn-primary btn-block">Submit</button>
     </form>
 
-
+<hr>
   <!-- Formatted Address Div --->
   <div class="card-block" id="formatted-address">
     </div>
@@ -284,6 +290,7 @@ ul {
     <!-- Geometry Div --->
     <div class="card-block" id="geometry">
     </div>
+    <button class="btn btn-success" id="goToLocationBtn">Let's GO!</button>
   </div>
 </div>
 </div>
@@ -296,11 +303,81 @@ ul {
 </body>
 </div>
 <!--- Map Script --->
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdhLrK9XoNFP9Yyjxcdd34z3Yf5K_qxeI&callback=initMap">
+    </script>
   <script>
   // Get user Location
   // Try HTML5 geolocation.
-  
+  var mapDiv=document.getElementById("map");
+  var pos;
+  var map;
+            var div = document.getElementById("location");
+            window.onload = getMyLocation;
+            function getMyLocation(){
+                if(navigator.geolocation){
+                    navigator.geolocation.getCurrentPosition(displayLocation,displayError);
+                }else{
+                    alert("Sorry, your browser does not support geolocation");
+                }
+            }
+
+            function displayLocation(position){
+                var latitude = position.coords.latitude;
+                var longitude = position.coords.longitude;
+                div.innerHTML = "<h4>Current Location:</h4><strong> Latitude:</strong> "+latitude+"<br><strong> Longitude:</strong> "+longitude;
+                showMap(position.coords);
+            }
+        
+            function displayError(error){
+                if(error.code==0){
+                    div.innerHTML="An unknown error occurred.";
+                }else if(error.code==1){
+                    div.innerHTML="You denied the request for Geolocation.";
+                }else if(error.code==2){
+                    div.innerHTML="Location information is unavailable.";
+                }else if(error.code==3){
+                    div.innerHTML="The request to get user location timed out.";
+                }
+            }
+
+            function showMap(coords){
+                var googleLatAndLong = new google.maps.LatLng(coords.latitude,coords.longitude);
+                var mapOptions = {
+                    zoom:10,
+                    center:googleLatAndLong,
+                    maptypeId:google.maps.MapTypeId.ROADMAP
+                };
+                // var mapDiv=document.getElementById("map");
+                map = new google.maps.Map(mapDiv,mapOptions);
+                var title="Your location";
+                var content = "You are here: "+coords.latitude+", "+coords.longitude;
+                addMarker(map,googleLatAndLong,title,content);
+            }
+        
+            function addMarker(map,latlong,title,content){
+                var markerOptions = {
+                    position:latlong,
+                    map:map,
+                    zxjtitle:title,
+                    clickable:true,
+                    scrollwheel: false,
+                    scaleControl: false
+                };
+                var marker = new google.maps.Marker(markerOptions);
+        
+                var infoWindowOptions = {
+                    content:content,
+                    position:latlong
+                };
+                var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
+                google.maps.event.addListener(marker,"click",function(){
+                    infoWindow.open(map);
+                });
+            }
+
   if (navigator.geolocation) {
+    var map;
           navigator.geolocation.getCurrentPosition(function(position) {
             var pos = {
               lat: position.coords.latitude,
@@ -309,38 +386,12 @@ ul {
             var infoWindow = new google.maps.InfoWindow({
               content: pos
             });
-            function addMarker(props){
-            var marker = new google.maps.Marker({
-            position:props.coords,
-            map:map,
-            icon:props.iconImage
-            });
             infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
+            swal('Location found!');
             console.log(pos);
-            addMarker(pos);
             infoWindow.open(map);
-            map.setCenter(pos);
-          } 
-          //   function {
-          //   handleLocationError(true, infoWindow, map.getCenter());
-          // });
-        // } else {
-        //   // Browser doesn't support Geolocation
-        //   handleLocationError(false, infoWindow, map.getCenter());
-        });
-
-      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-                              'Error: The Geolocation service failed.' :
-                              'Error: Your browser doesn\'t support geolocation.');
-        infoWindow.open(map);
-        console.log(pos);
-      }
+      });
       
-  // Call Geocode
-  //geocode();
   // Get Location form
   var locationForm = document.getElementById('location-form');
   // Listen for submit
@@ -373,7 +424,7 @@ ul {
       for(var i = 0;i < addressComponents.length;i++){
         addressComponentsOutput += `
           <li class="list-group-item"><strong>${addressComponents[i].types[0]
-          }</strong>: ${addressComponents[i].long_name}</li>
+          }</strong>: ${addressComponents[i].short_name}</li>
         `;
       }
       addressComponentsOutput += '</ul>';
@@ -397,87 +448,31 @@ ul {
       console.log(error);
     });
   }
-//   // Javascript Google Maps 
-  function initMap(){
-    // Map Options
-    var options = {
-      scrollwheel: false,
-      scaleControl: false,
-      zoom:8,
-      center: {lat:37.8716,lng:-122.2727}
-    }
-    // New Map
-    var map = new google.maps.Map(document.getElementById('map'), options);
-    
-    // // Listen for click on map
-    // google.maps.event.addListener(map, 'click',
-    //  function(event){
-    //    addMarker({coords:event.latLng});
-    //  });
-    // Array of markers
-    var markers = [
-      {
-      coords:{lat:37.8716,lng:-122.2727},
-      iconImage: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-      content:'<h2>Berkeley, CA<h2>'
-      },
-      {
-      coords:{lat:37.7749,lng:-122.4194},
-      iconImage: '',
-      content:'<h2>San Fransisco, CA</h2>'
-      },
-      {
-      coords:{lat:37.8044,lng:-122.2711},
-      iconImage: '',
-      content:'<h2>Oakland, CA</h2>'
-      },
-      {
-      coords:{lat:37.3382,lng:-121.8863},
-      iconImage: '',
-      content:'<h2>San Jose, CA</h2>'
-    }
-    ];
-    // Loop through markers
-    for(var i = 0;i < markers.length;i++){
-      // Add marker
-      addMarker(markers[i]);
-    }
-    // Add Marker Function
-    function addMarker(props){
-      var marker = new google.maps.Marker({
-      position:props.coords,
-      map:map,
-      icon:props.iconImage
-    });
-    // Check for customIcon
-    if(props.iconImage){
-      // Set icon image
-      marker.setIcon(props.iconImage);
-    }
-    // Check content
-    if(props.content){
-      var infoWindow = new google.maps.InfoWindow({
-      content:props.content
-    });
-    
-    marker.addListener('click', function(){
-      infoWindow.open(map, marker);
-    });
-    }
+
+  goToLocationBtn.addEventListener('click', goToLocation());
+  
+  function goToLocation(e){
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            var infoWindow = new google.maps.InfoWindow({
+              content: pos
+            });
+            // map = new google.maps.Map(mapDiv,mapOptions);
+            map.panTo(pos);
+            infoWindow.open(map);
+      });
   }
 
-// var map;
-//       var marker;
-//       var infowindow;
-//       var messagewindow;
-
-//       function initMap() {
-//         var california = {lat: 37.4419, lng: -122.1419};
-//         map = new google.maps.Map(document.getElementById('map'), {
-//           center: california,
-//           zoom: 13
-//         });
-
+//   // Javascript Google Maps 
+  function initMap(){
+    var marker = new google.maps.Marker({
+    position: pos,
+    map: map,
+    title: 'Hello World!'
+  });
         infowindow = new google.maps.InfoWindow({
           content: document.getElementById('form')
         });
@@ -486,16 +481,9 @@ ul {
           content: document.getElementById('message')
         });
 
-        // google.maps.event.addListener(map, 'click', function(event) {
-        //   marker = new google.maps.Marker({
-        //     position: event.latLng,
-        //     map: map
-        //   });
-
-
-          // google.maps.event.addListener(marker, 'click', function() {
-          //   infowindow.open(map, marker);
-          // });
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(map, marker);
+          });
       
 
       function saveData() {
@@ -518,7 +506,7 @@ ul {
       function downloadUrl(url, callback) {
         var request = window.ActiveXObject ?
             new ActiveXObject('Microsoft.XMLHTTP') :
-            new XMLHttpRequest;
+            new XMLHttpRequest();
 
         request.onreadystatechange = function() {
           if (request.readyState == 4) {
@@ -536,13 +524,10 @@ ul {
 }
 }
   </script>
-  <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdhLrK9XoNFP9Yyjxcdd34z3Yf5K_qxeI&callback=initMap">
-    </script>
  </body>
 </html>
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
