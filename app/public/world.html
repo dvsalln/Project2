@@ -5,16 +5,183 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"> 
-    <link rel="stylesheet" type="text/css" href="../public/css/styles.css">
+    <!-- <link rel="stylesheet" type="text/css" href="../public/css/styles.css"> -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.25.0/sweetalert2.all.js"></script> 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.25.0/sweetalert2.css">
+<style>
+button.submit {
+  float: right;
+}
 
+form#cms {
+  margin-top: 50px;
+}
+
+#cms textarea {
+  resize: none;
+}
+
+.card-header button.delete,
+button.edit {
+  float: right;
+  margin: 5px;
+}
+
+.author-container {
+  margin-top: 50px;
+}
+
+.author-list {
+  margin-top: 25px;
+}
+
+.blog-container {
+  margin-top: 30px;
+}
+
+.blog {
+  margin-top: 30px;
+}
+
+.hidden {
+  display: none;
+}
+
+#author-name {
+  width: 100%;
+  height: 35px;
+  margin-top: 5px;
+}
+
+.top-30 {
+  margin-top: 30px;
+}
+
+body {
+  font-family: 'PT Sans Narrow', sans-serif;
+}
+
+.display-4, .lead {
+  text-align: center;
+}
+
+.btnSignIn, .btnSignUp {
+  /* need to center the buttons */
+  margin-left:auto;
+  margin-right:auto;
+  display:block;
+}
+
+.profileContainer {
+  margin-top: 20px;
+}
+
+ #html {
+  padding: 10px;
+}
+
+#loginImg {
+  background: no-repeat url('../images/login.jpg');
+  height: 100%;
+  width: 100%;
+}
+
+/* The Modal (background) */
+.modal {
+ border-radius: 20px 20px 20px 20px;
+ display: none; /* Hidden by default */
+ position: fixed; /* Stay in place */
+ z-index: 1; /* Sit on top */
+ left: 0;
+ top: 0;
+ background-image: url();
+ padding-top: 60px;
+}
+/* Modal Content/Box */
+.modal-content {
+ margin: auto;
+ text-align: center;
+ line-height: 25px;
+ padding: 5px;
+}
+body, html, form, p, h1,h2,h3,h4,h5,h6 {
+ font-family: "Montserrat", sans-serif; 
+ letter-spacing: 3px;
+}
+p {
+ color: white;
+}
+.w3-row-padding img {
+ margin-bottom: 12px;
+}
+/* Set the width of the sidebar to 120px */
+.w3-sidebar {
+ width: 180px;background: #333;
+}
+
+#navProfileImg {
+ margin-top: 10px;
+ border-radius: 100px 100px 100px 100px;
+ height: 125px;
+ width: 125px;
+}
+
+#dropbtn {
+
+ margin-bottom: 20px;
+ 
+}
+
+#dropitem {
+ color: white;
+ padding: 2%;
+ height: 30px;
+ background: #222;
+}
+/* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+#main {
+ margin-left: 170px;
+}
+ul {
+ color: #131313;
+ padding: 1%;
+ margin-left: 10px;
+ margin-right: 10px;
+ border-radius: 20px 20px 20px 20px;
+}
+#map {
+ height: 500px;  /* The height is 400 pixels */
+ width: 100%;  /* The width is the width of the web page */
+}
+#profileCard {
+ color: white;
+ float: right;
+ background: #333;
+ border: 5px solid silver;
+ border-radius: 20px 20px 20px 20px;
+ height: 500px;
+}
+
+#notifsBtn {
+ margin-bottom: 20px;
+}
+
+#jumbotron-title {
+ background-image: url('');
+ color: #e9e9e9;
+ font-size: 58px;
+ text-align: center;
+ font-family: "Montserrat", sans-serif;
+ letter-spacing: 7px;
+ line-height: 1.5px;
+}
+</style>
  <!-- Icon Bar (Sidebar - hidden on small screens) -->
  <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
    <!-- Avatar image in top left corner -->
-   <img id="navProfileImg" src="../assets/images/earth.jpg" class="profile-image img-circle">
+   <img id="navProfileImg" src="https://images.pexels.com/photos/87651/earth-blue-planet-globe-planet-87651.jpeg?auto=compress&cs=tinysrgb&h=350" class="profile-image img-circle">
    <hr>
  
    <div class="btn-group dropdown">
@@ -81,10 +248,21 @@
 	                    }
                         setInterval(displayTime, 1000);
                 </script>
+                 <!-- Buttons -->
+                 <br>
+          <p>
+              <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#addressCard" aria-expanded="false" aria-controls="addressCard">
+                Search Location
+                </button>
+              <!-- <button class="btn bg-dark btn-secondary" typ e="button" data-toggle="collapse" data-target="#card" aria-expanded="false" aria-controls="card">
+                View Groups
+              </button> -->
+            </p>
               </div>
              </div>
       </div>
 
+<div class="card" id="addressCard">
 <div class="container py-5">
 <!--- Body --->
 <body>
@@ -96,6 +274,7 @@
       <button type="submit" class="btn btn-primary btn-block">Submit</button>
     </form>
 
+
   <!-- Formatted Address Div --->
   <div class="card-block" id="formatted-address">
     </div>
@@ -106,14 +285,60 @@
     <div class="card-block" id="geometry">
     </div>
   </div>
-
+</div>
+</div>
 <!--- Map --->
+<div class="container py-5">
 <div class="row">
   <div class="col-12-lg"></div>
   <div id="map"></div>
-  </div>
+
+</body>
+</div>
 <!--- Map Script --->
   <script>
+  // Get user Location
+  // Try HTML5 geolocation.
+  
+  if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            var infoWindow = new google.maps.InfoWindow({
+              content: pos
+            });
+            function addMarker(props){
+            var marker = new google.maps.Marker({
+            position:props.coords,
+            map:map,
+            icon:props.iconImage
+            });
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Location found.');
+            console.log(pos);
+            addMarker(pos);
+            infoWindow.open(map);
+            map.setCenter(pos);
+          } 
+          //   function {
+          //   handleLocationError(true, infoWindow, map.getCenter());
+          // });
+        // } else {
+        //   // Browser doesn't support Geolocation
+        //   handleLocationError(false, infoWindow, map.getCenter());
+        });
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+        console.log(pos);
+      }
+      
   // Call Geocode
   //geocode();
   // Get Location form
@@ -172,7 +397,7 @@
       console.log(error);
     });
   }
-  // Javascript Google Maps 
+//   // Javascript Google Maps 
   function initMap(){
     // Map Options
     var options = {
@@ -194,12 +419,12 @@
       {
       coords:{lat:37.8716,lng:-122.2727},
       iconImage: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-      content:'<h2>San Francisco, CA<h2>'
+      content:'<h2>Berkeley, CA<h2>'
       },
       {
       coords:{lat:37.7749,lng:-122.4194},
       iconImage: '',
-      content:'<h2>Berkeley, CA</h2>'
+      content:'<h2>San Fransisco, CA</h2>'
       },
       {
       coords:{lat:37.8044,lng:-122.2711},
@@ -222,7 +447,7 @@
       var marker = new google.maps.Marker({
       position:props.coords,
       map:map,
-      // icon:props.iconImage
+      icon:props.iconImage
     });
     // Check for customIcon
     if(props.iconImage){
@@ -240,6 +465,75 @@
     });
     }
   }
+
+// var map;
+//       var marker;
+//       var infowindow;
+//       var messagewindow;
+
+//       function initMap() {
+//         var california = {lat: 37.4419, lng: -122.1419};
+//         map = new google.maps.Map(document.getElementById('map'), {
+//           center: california,
+//           zoom: 13
+//         });
+
+        infowindow = new google.maps.InfoWindow({
+          content: document.getElementById('form')
+        });
+
+        messagewindow = new google.maps.InfoWindow({
+          content: document.getElementById('message')
+        });
+
+        // google.maps.event.addListener(map, 'click', function(event) {
+        //   marker = new google.maps.Marker({
+        //     position: event.latLng,
+        //     map: map
+        //   });
+
+
+          // google.maps.event.addListener(marker, 'click', function() {
+          //   infowindow.open(map, marker);
+          // });
+      
+
+      function saveData() {
+        var name = escape(document.getElementById('name').value);
+        var address = escape(document.getElementById('address').value);
+        var type = document.getElementById('type').value;
+        var latlng = marker.getPosition();
+        var url = 'phpsqlinfo_addrow.php?name=' + name + '&address=' + address +
+                  '&type=' + type + '&lat=' + latlng.lat() + '&lng=' + latlng.lng();
+
+        downloadUrl(url, function(data, responseCode) {
+
+          if (responseCode == 200 && data.length <= 1) {
+            infowindow.close();
+            messagewindow.open(map, marker);
+          }
+        });
+      }
+
+      function downloadUrl(url, callback) {
+        var request = window.ActiveXObject ?
+            new ActiveXObject('Microsoft.XMLHTTP') :
+            new XMLHttpRequest;
+
+        request.onreadystatechange = function() {
+          if (request.readyState == 4) {
+            request.onreadystatechange = doNothing;
+            callback(request.responseText, request.status);
+          }
+        };
+
+        request.open('GET', url, true);
+        request.send(null);
+      }
+
+      function doNothing () {
+      }
+}
 }
   </script>
   <script async defer
