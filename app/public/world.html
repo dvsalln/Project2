@@ -277,7 +277,7 @@ ul {
     <form action="" id="location-form">
       <input class="form-control form-control-lg" type="text" id="location-input">
       <br>
-      <button type="submit" class="btn btn-primary btn-block">Submit</button>
+      <button id="enterLocationBtn" type="submit" class="btn btn-primary btn-block">Submit</button>
     </form>
 
 <hr>
@@ -307,6 +307,7 @@ ul {
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdhLrK9XoNFP9Yyjxcdd34z3Yf5K_qxeI&callback=initMap">
     </script>
   <script>
+
   // Get user Location
   // Try HTML5 geolocation.
   var mapDiv=document.getElementById("map");
@@ -346,12 +347,14 @@ ul {
                 var mapOptions = {
                     zoom:10,
                     center:googleLatAndLong,
-                    maptypeId:google.maps.MapTypeId.ROADMAP
+                    maptypeId:google.maps.MapTypeId.ROADMAP,
+                    scrollwheel:false,
+                    scaleControl: false
                 };
-                // var mapDiv=document.getElementById("map");
+                var mapDiv=document.getElementById("map");
                 map = new google.maps.Map(mapDiv,mapOptions);
                 var title="Your location";
-                var content = "You are here: "+coords.latitude+", "+coords.longitude;
+                var content = "<h6>Current Location:</h6><strong> Latitude:</strong> "+coords.latitude+"<br><strong> Longitude:</strong>  "+coords.longitude;
                 addMarker(map,googleLatAndLong,title,content);
             }
         
@@ -443,6 +446,7 @@ ul {
       document.getElementById('formatted-address').innerHTML = formattedAddressOutput;
       document.getElementById('address-components').innerHTML = addressComponentsOutput;
       document.getElementById('geometry').innerHTML = geometryOutput;
+      
     })
     .catch(function(error){
       console.log(error);
@@ -460,9 +464,13 @@ ul {
             var infoWindow = new google.maps.InfoWindow({
               content: pos
             });
-            // map = new google.maps.Map(mapDiv,mapOptions);
+            map = new google.maps.Map({
+            position: pos,
+            map: map
+            })
             map.panTo(pos);
-            infoWindow.open(map);
+            infoWindow.open(map),
+            initMap();
       });
   }
 
@@ -524,7 +532,8 @@ ul {
 }
 }
   </script>
- </body>
+ </body
+ >
 </html>
 
 
