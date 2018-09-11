@@ -7,19 +7,26 @@
 *********************************************** 
 */
 
-module.exports = function (sequelize, DataTypes){
-    var Friend = sequelize.define("Friend", {
-        profilePhoto: DataTypes.BLOB,
-        firstName: DataTypes.STRING,
-        lastName: DataTypes.STRING,
-        email: DataTypes.STRING,
-        age: DataTypes.INTEGER,
-        password: DataTypes.STRING,
-        gender: DataTypes.STRING,
-        occupation: DataTypes.STRING,
-        location: DataTypes.STRING,
-        summary: DataTypes.TEXT,
-        interests: DataTypes.TEXT,
-    });
-    return Friend;
-}
+// Sequelize (capital) references the standard library
+var Sequelize = require("sequelize");
+// sequelize (lowercase) references my connection to the DB.
+var sequelize = require("../config/connection.js");
+
+var Friend = sequelize.define("Friend", {
+    // profilePhoto: DataTypes.BLOB,
+    firstName: Sequelize.STRING,
+    lastName: Sequelize.STRING,
+    email: Sequelize.STRING,
+    age: Sequelize.INTEGER,
+    password: Sequelize.STRING,
+    gender: Sequelize.STRING,
+    occupation: Sequelize.STRING,
+    location: Sequelize.STRING,
+    summary: Sequelize.TEXT,
+    interests: Sequelize.TEXT
+});
+
+Friend.sync();
+
+module.exports = Friend;
+ 
