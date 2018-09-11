@@ -1,6 +1,7 @@
 // Requiring our models
-var Friend = require("../models/friend.js");
+var db = require("../models/friend.js");
 
+var Friend = require("../models/friend.js")
 module.exports = function (app) {
 
     // POST route for registering a new user
@@ -10,11 +11,12 @@ module.exports = function (app) {
         });
     });
 
-    app.post("/api/new", function(req, res) {
-        console.log("New Profile: ");
+
+    app.post("/api/new", function(req, res){
+        console.log("New Friend: ");
         console.log(req.body);
 
-        Friend.create({
+       Friend.create({
             firstName: req.body.firstName, 
             lastName: req.body.lastName,
             email: req.body.email,
@@ -22,12 +24,10 @@ module.exports = function (app) {
             password: req.body.password,
             gender: req.body.gender,
             occupation: req.body.occupation,
-            location: req.body.location, 
+            location: req.body.location,
             summary: req.body.summary,
             interests: req.body.interests
-
         });
-
-
     });
+
 };
