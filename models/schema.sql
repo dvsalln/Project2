@@ -9,7 +9,7 @@ USE friendify_db;
 CREATE TABLE friends
 (
 	id INT NOT NULL AUTO_INCREMENT,
-    userImg LONGBLOB NULL
+    userImg LONGBLOB NULL,
 	fName VARCHAR(255) NOT NULL,
     lName VARCHAR(255) NOT NULL,
 	email VARCHAR(100) NOT NULL,
