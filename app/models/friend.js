@@ -11,8 +11,9 @@
 var Sequelize = require("sequelize");
 // sequelize (lowercase) references my connection to the DB.
 var sequelize = require("../config/connection.js");
+// module.exports = function(application, req, res){
 
-var Friend = sequelize.define("Friend", {
+    var Friend = sequelize.define("friends", {
     // profilePhoto: DataTypes.BLOB,
     firstName: Sequelize.STRING,
     lastName: Sequelize.STRING,
@@ -25,8 +26,6 @@ var Friend = sequelize.define("Friend", {
     summary: Sequelize.TEXT,
     interests: Sequelize.TEXT
 });
-
 Friend.sync();
 
 module.exports = Friend;
- 
