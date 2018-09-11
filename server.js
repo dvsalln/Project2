@@ -16,7 +16,7 @@
 // =============================================================
 var express = require("express");
 var bodyParser = require("body-parser");
-
+var path = require("path");
 // Sets up the Express App
 // =============================================================
 var app = express();
@@ -35,7 +35,6 @@ app.use(bodyParser.json());
 // Static directory
 app
 .use(express.static("views"));
-
 // Routes
 // =============================================================
 require ("./routes/friend-api-routes.js")(app);
