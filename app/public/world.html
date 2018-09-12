@@ -453,26 +453,26 @@ ul {
     });
   }
 
-  goToLocationBtn.addEventListener('click', goToLocation());
+  // goToLocationBtn.addEventListener('click', goToLocation());
   
-  function goToLocation(e){
-          navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
-            var infoWindow = new google.maps.InfoWindow({
-              content: pos
-            });
-            map = new google.maps.Map({
-            position: pos,
-            map: map
-            })
-            map.panTo(pos);
-            infoWindow.open(map),
-            initMap();
-      });
-  }
+  // function goToLocation(e){
+  //         navigator.geolocation.getCurrentPosition(function(position) {
+  //           var pos = {
+  //             lat: position.coords.latitude,
+  //             lng: position.coords.longitude
+  //           };
+  //           var infoWindow = new google.maps.InfoWindow({
+  //             content: pos
+  //           });
+  //           map = new google.maps.Map({
+  //           position: pos,
+  //           map: map
+  //           })
+  //           map.panTo(pos);
+  //           infoWindow.open(map),
+  //           initMap();
+  //     });
+  // }
 
 //   // Javascript Google Maps 
   function initMap(){
