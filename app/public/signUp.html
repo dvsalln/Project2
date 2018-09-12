@@ -42,11 +42,11 @@
         <!-- Sign Up form -->
         
         <div class = "container">
-            <form action="" method="POST" role="form">
+            <form action="/api/new" enctype="multipart/form-data" method="POST" role="form" id="signUpForm">
                 
                 <div class="form-group">
                     <label for="exampleFormControlFile1">Upload  a Photo</label>
-                    <input type="file" class="form-control-file" id="userPhoto">
+                    <input type="file" name="photo" class="form-control-file" id="userPhoto">
                 </div>
 
                 <div class="row">
