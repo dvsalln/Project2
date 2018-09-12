@@ -17,6 +17,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var path = require('path');
+var exphbs = require("express-handlebars");
 
 // Sets up the Express App
 // =============================================================
@@ -34,11 +35,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Static directory
-
 app.use(express.static(path.join(__dirname, 'app/public')));
-
-
 app.use(express.static("views"));
+
+//Handlebars
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
 
 // Routes

@@ -13,8 +13,8 @@ var Sequelize = require("sequelize");
 var sequelize = require("../config/connection.js");
 // module.exports = function(application, req, res){
 
-    var Friend = sequelize.define("friends", {
-    // profilePhoto: DataTypes.BLOB,
+var Friend = sequelize.define("friends", {
+    profilePhoto: Sequelize.BLOB('long'),
     firstName: Sequelize.STRING,
     lastName: Sequelize.STRING,
     email: Sequelize.STRING,
@@ -26,6 +26,6 @@ var sequelize = require("../config/connection.js");
     summary: Sequelize.TEXT,
     interests: Sequelize.TEXT
 });
-Friend.sync();
+Friend.sync({force: false});
 
 module.exports = Friend;
