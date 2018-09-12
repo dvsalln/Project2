@@ -10,24 +10,24 @@ module.exports = function (app) {
         });
     });
 
-    app.post("/api/new", function(req, res) {
+    app.post("/api/new", function (req, res) {
         console.log("New Profile: ");
         console.log(req.body);
 
         Friend.create({
-            firstName: req.body.firstName, 
+            firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
             age: req.body.age,
             password: req.body.password,
             gender: req.body.gender,
             occupation: req.body.occupation,
-            location: req.body.location, 
+            location: req.body.location,
             summary: req.body.summary,
             interests: req.body.interests
 
+        }).then(function (result) {
+            res.end();
         });
-
-
     });
 };

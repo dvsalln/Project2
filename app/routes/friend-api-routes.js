@@ -12,22 +12,27 @@ module.exports = function (app) {
     });
 
 
-    app.post("/api/new", function(req, res){
+    app.post("/api/new", function (req, res) {
         console.log("New Friend: ");
         console.log(req.body);
 
-       Friend.create({
-            firstName: req.body.firstName, 
-            lastName: req.body.lastName,
-            email: req.body.email,
-            age: req.body.age,
-            password: req.body.password,
-            gender: req.body.gender,
-            occupation: req.body.occupation,
-            location: req.body.location,
-            summary: req.body.summary,
-            interests: req.body.interests
+        Friend.create(req.body).then(function (data) {
+            res.json(data);
+
         });
+
     });
 
+    // Use Handlebars to render the main index.html page with the movies in it.
+    app.get("/api/profile/:id", function (req, res) {
+
+        Friend.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then(function (result) {
+            // return res.json(result);
+            res.render("profile", result);
+        });
+    });
 };
