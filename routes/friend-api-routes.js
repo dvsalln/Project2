@@ -1,6 +1,7 @@
 // Requiring our models
-var Friend = require("../models/friend.js");
+var db = require("../models/friend.js");
 
+var Friend = require("../models/friend.js")
 module.exports = function (app) {
 
     // POST route for registering a new user
@@ -10,24 +11,30 @@ module.exports = function (app) {
         });
     });
 
+
     app.post("/api/new", function (req, res) {
-        console.log("New Profile: ");
+        console.log("New Friend: ");
         console.log(req.body);
 
-        Friend.create({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            age: req.body.age,
-            password: req.body.password,
-            gender: req.body.gender,
-            occupation: req.body.occupation,
-            location: req.body.location,
-            summary: req.body.summary,
-            interests: req.body.interests
+        Friend.create(req.body).then(function (data) {
+            res.json(data);
 
+        });
+
+    });
+
+    // Use Handlebars to render the user profile page
+    app.get("/api/profile", function (req, res) {
+
+        Friend.findOne({
+            where: {
+                // id: req.params.id
+                id: req.query.id
+            }
         }).then(function (result) {
-            res.end();
+            // return res.json(result);
+            console.log(result.dataValues);
+            res.render("profile", result.dataValues);
         });
     });
 };

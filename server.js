@@ -36,7 +36,7 @@ app.use(bodyParser.json());
 
 // Static directory
 // app.use(express.static(path.join(__dirname, 'app/public')));
-app.use(express.static('app/public'));
+app.use(express.static('public'));
 app.use(express.static("views"));
 
 //Handlebars
@@ -46,8 +46,10 @@ app.set("view engine", "handlebars");
 
 // Routes
 // =============================================================
-require("./app/routes/friend-api-routes.js")(app);
-require("./app/routes/html-routes.js")(app);
+// require("./app/routes/friend-api-routes.js")(app);
+// require("./app/routes/html-routes.js")(app);
+require("./routes/friend-api-routes.js")(app);
+require("./routes/html-routes.js")(app);
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
