@@ -23,16 +23,18 @@ module.exports = function (app) {
 
     });
 
-    // Use Handlebars to render the main index.html page with the movies in it.
-    app.get("/api/profile/:id", function (req, res) {
+    // Use Handlebars to render the user profile page
+    app.get("/api/profile", function (req, res) {
 
         Friend.findOne({
             where: {
-                id: req.params.id
+                // id: req.params.id
+                id: req.query.id
             }
         }).then(function (result) {
             // return res.json(result);
-            res.render("profile", result);
+            console.log(result.dataValues);
+            res.render("profile", result.dataValues);
         });
     });
 };
