@@ -24,8 +24,7 @@ var Friend = sequelize.define("friends", {
     occupation: Sequelize.STRING,
     location: Sequelize.STRING,
     summary: Sequelize.TEXT,
-    interests: Sequelize.TEXT, 
-    blog: Sequelize.TEXT
+    interests: Sequelize.TEXT
 });
 Friend.sync({force: false});
 
