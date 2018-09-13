@@ -10,6 +10,47 @@ form#cms {
   resize: none;
 }
 
+.modal {
+  margin-right: -55px;
+  border-radius: 20px 20px 20px 20px;
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  background-image: url('../images/light-grey-terrazzo');
+  padding-top: 60px;
+}
+.modal-content {
+  margin: auto;
+  text-align: center;
+  line-height: 25px;
+  padding: 5px;
+}
+#login {
+  font-weight: bold;
+  color: #131313;
+  border: 7px solid silver;
+  margin-top: 120px;
+  margin-right: 200px;
+  background: url('../images/light-grey-terrazzo.png');
+  width: 225px;
+  height: 225px;
+}
+#btnrow {
+  margin-left: 5px;
+}
+
+#loginbtn {
+  margin-left: 20px;
+  float: center;
+}
+
+#cancelbtn {
+  margin-left: 20px;
+  float: left;
+}
+
 .card-header button.delete,
 button.edit {
   float: right;
