@@ -1,9 +1,14 @@
-$("#add-btn").on("click", function(event){
+$("#add-btn").on("click", function (event) {
     event.preventDefault();
 
+    var profilePhoto = document.getElementById('userPhoto').files[0];
+    let file = new File([profilePhoto], profilePhoto, { "type": "image/jpg" });
+    let reader = new FileReader();
+
+
     var newProfile = {
-        // profilePhoto: 
-        firstName: $("#userFName").val().trim(), 
+        profilePhoto: null,
+        firstName: $("#userFName").val().trim(),
         lastName: $("#userLName").val().trim(),
         email: $("#userEmail").val().trim(),
         age: $("#userAge").val().trim(),
@@ -13,21 +18,22 @@ $("#add-btn").on("click", function(event){
         location: $("#userLocation").val().trim(),
         summary: $("#userSummary").val().trim(),
         interests: $("#userInterests").val().trim()
-    }; 
+    };
 
-    $.post("/api/new", newProfile)
-        .then(function(data){
-            console.log(data);
+    reader.onload = function () {
+        newProfile.profilePhoto = reader.result;
+        $.ajax({
+            headers: {
+                "Content-Type": "application/json"
+            },
+            type: "POST",
+            url: "/api/new",
+            data: JSON.stringify(newProfile)
+
+        }).then(function () {
+
+            window.location.href = "/world.html";
         });
-
-        $("#userFName").val("");
-        $("#userLName").val("");
-        $("#userEmail").val("");
-        $("#userAge").val("");
-        $("#userPassword").val("");
-        $("#userGender").val("");
-        $("#userOccupation").val("");
-        $("#userLocation").val("");
-        $("#userSummary").val("");
-        $("#userInterests").val("");
+    }
+    reader.readAsDataURL(file);
 });
