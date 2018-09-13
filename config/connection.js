@@ -14,3 +14,4 @@ var sequelize = new Sequelize("friendify_db", "root", "root", {
 
 // Exports the connection for other files to use
 module.exports = sequelize;
+

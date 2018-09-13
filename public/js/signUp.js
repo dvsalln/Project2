@@ -35,5 +35,7 @@ $("#add-btn").on("click", function (event) {
             window.location.href = "/world.html";
         });
     }
-    reader.readAsDataURL(file);
+
+    window.location.href="../world.html"
+    // reader.readAsDataURL(file);
 });

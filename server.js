@@ -22,7 +22,7 @@ var exphbs = require("express-handlebars");
 // Sets up the Express App
 // =============================================================
 var app = express();
-var PORT = process.env.PORT || 8888;
+var PORT = process.env.PORT || 8999;
 
 // Requiring our models for syncing
 // var db = require("./models");
@@ -48,9 +48,10 @@ app.set("view engine", "handlebars");
 // =============================================================
 // require("./app/routes/friend-api-routes.js")(app);
 // require("./app/routes/html-routes.js")(app);
-require("./routes/friend-api-routes.js")(app);
+require("./routes/author-api-routes.js")(app);
 require("./routes/html-routes.js")(app);
-
+require("./routes/friend-api-routes.js")(app);
+require("./routes/post-api-routes")(app);
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
 // db.sequelize.sync().then(function() {
